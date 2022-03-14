@@ -1,0 +1,18 @@
+#!/bin/env bash
+
+cd "$(dirname "$0")"
+
+pwd
+
+mkdir -p /tmp/GM70REST/
+touch /tmp/GM70REST/LOCK
+while true; do
+	FILEA=/tmp/OSMRI/LOCK
+	if test -f "$FILEA"; then
+    	echo "STARTING GM70REST"
+		_GM70REST_INSTALL_DIR_/gm70rest
+		sleep 10
+	else
+	    	exit 1
+	fi	
+done

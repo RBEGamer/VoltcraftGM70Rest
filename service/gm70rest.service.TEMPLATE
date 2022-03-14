@@ -1,0 +1,17 @@
+[Unit]
+Description=GM70REST
+Requires=network-online.target
+After=network-online.target
+Before=
+
+[Service]
+Type=simple
+
+WorkingDirectory=_GM70REST_INSTALL_DIR_
+
+ExecStart=_GM70REST_INSTALL_DIR_/gm70rest
+StandardOutput=journal
+TimeoutStopSec=10
+
+[Install]
+WantedBy=multi-user.target
