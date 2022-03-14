@@ -162,7 +162,7 @@ $ cat ./gm70rest_config.ini
 ### GET CURRENT VALUE
 
 ```bash
-# GET LAST CAN FRAME WITH CAN ID 200
+# GET LAST VALUE
 $ curl http://127.0.0.1:4240/current
 ```
 
