@@ -17,7 +17,7 @@ The device sends a 16 BYTES message each second.
 | 3    | unit 1             | 'B' => Gauss, 'E' => mT    |
 | 4    | unit 2             |                            |
 | 5    | polarity           | '0' => NORTH, '1' => SOUTH |
-| 6    | decimal dot offset | '1' => *0.1, '2' => *0.2   |
+| 6    | decimal dot offset | '1' => *0.1, '2' => *0.01  |
 | 7    | value MSB          |                            |
 | 8    |                    |                            |
 | 9    |                    |                            |
