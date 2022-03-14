@@ -77,6 +77,8 @@ $ cat ./service/99-gm70rest.rules
 ## INSTALLS BINARY AND SYSTEMD SERVICE
 $ export GM70REST_INSTALL_DIR="/home/$USER/gm70rest"
 $ sudo -E bash ./service/install_service.sh 
+
+$ sudo usermod -a -G dialout $USER
 ```
 
 ### MANUAL INSTALLATION
