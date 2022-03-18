@@ -78,21 +78,25 @@ bool gm70_serial_connection::connect(std::string _port, const int _baud) {
         return false;
     }
 
-    if(!std::filesystem::is_symlink(_port)){
+    if(std::filesystem::is_symlink(_port)){
         LOG_F(INFO, "gm70_serial_connection::connect filesystem::is_symlink(_port) %s", _port.c_str());
-        _port = std::filesystem::read_symlink(_port);
+        //GET PREFIX EG /dev/
+        std::string prefix = "";
+        const size_t slash_index = _port.find_last_of("/\\");
+        if(slash_index){
+            prefix = _port.substr(0,slash_index) + '/';
+        }
+        //ADD SYMLINK DESTINATION ttyTEST =>prefix + ttyUSB0 = /dev/ttyUSB0
+        _port = prefix + std::filesystem::read_symlink(_port).string();
         LOG_F(INFO, "gm70_serial_connection::connect filesystem::read_symlink(_port) %s", _port.c_str());
     }
 
-    const char errorOpening = serial_connection.openDevice(_port.c_str(), _baud);
-
-    if (errorOpening != 1) {
+    if (serial_connection.openDevice(_port.c_str(), _baud) != 1) {
         LOG_F(ERROR, "gm70_serial_connection::connect CANT OPEN DEVICE");
         return false;
     };
-    // serial_connection.
-    serial_connection.flushReceiver();
 
+    serial_connection.flushReceiver();
     return true;
 }
 
