@@ -7,6 +7,7 @@
 #include <string>
 #include <iomanip>
 #include <filesystem>
+#include <cstddef>         // std::size_t
 
 #include "loguru/loguru.hpp"
 #include "serialib/lib/serialib.h"
