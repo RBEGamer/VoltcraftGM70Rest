@@ -57,7 +57,7 @@ bool gm70_serial_connection::check_baud_rate(const int _baudrate_to_check) {
 #endif
 }
 
-bool gm70_serial_connection::connect(const std::string _port, const int _baud) {
+bool gm70_serial_connection::connect(std::string _port, const int _baud) {
     //CLOSE DDEVICE IF OPEN
     if (serial_connection.isDeviceOpen()) {
         serial_connection.closeDevice();
@@ -71,6 +71,17 @@ bool gm70_serial_connection::connect(const std::string _port, const int _baud) {
     if (_baud <= 0 || !check_baud_rate(_baud)) {
         LOG_F(ERROR, "gm70_serial_connection::connect BAUD-RATE invalid %i", _baud);
         return false;
+    }
+
+    if(!std::filesystem::exists(_port)){
+        LOG_F(ERROR, "gm70_serial_connection::connect filesystem::exists(_port) %s", _port.c_str());
+        return false;
+    }
+
+    if(!std::filesystem::is_symlink(_port)){
+        LOG_F(INFO, "gm70_serial_connection::connect filesystem::is_symlink(_port) %s", _port.c_str());
+        _port = std::filesystem::read_symlink(_port);
+        LOG_F(INFO, "gm70_serial_connection::connect filesystem::read_symlink(_port) %s", _port.c_str());
     }
 
     const char errorOpening = serial_connection.openDevice(_port.c_str(), _baud);
