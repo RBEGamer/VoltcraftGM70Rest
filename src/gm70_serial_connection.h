@@ -6,6 +6,7 @@
 #define SRC_GM70REST_GM70_SERIAL_CONNECTION_H
 #include <string>
 #include <iomanip>
+#include <filesystem>
 
 #include "loguru/loguru.hpp"
 #include "serialib/lib/serialib.h"
